@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/store/user'
 
+const modules = import.meta.glob('../views/**/*.vue')
+
 const constantRoutes = [
   {
     path: '/login',
@@ -104,9 +106,10 @@ function generateRoutes(menus, parentPath = '') {
     }
 
     if (menu.component) {
-      try {
-        route.component = () => import(`@/views/${menu.component}.vue`)
-      } catch (e) {
+      const modulePath = `../views/${menu.component}.vue`
+      if (modules[modulePath]) {
+        route.component = modules[modulePath]
+      } else {
         route.component = () => import('@/views/error/404.vue')
       }
     }
