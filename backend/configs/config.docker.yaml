@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  mode: release
+
+database:
+  host: mysql
+  port: 3306
+  username: root
+  password: root123
+  dbname: admin_system
+  charset: utf8mb4
+
+jwt:
+  secret: admin-system-jwt-secret-key
+  expire: 24
